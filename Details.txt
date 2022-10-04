@@ -1,0 +1,60 @@
+Web Api in VS code , using .net Core
+1) Install .Net core from MS site.
+2) Once it is installed , can check the ver in cmd dotnet --version
+3) If we are able to see the version , we need to create the folder for the application 
+and create the solution 
+dotnet new sln  :- this cmd will create new sln
+4)Next step was to create the web api project 
+dotnet new webapi -o API  :- here -o is the output and "API" is name of the project
+5)Next step is to add Solution to the API 
+dotnet sln add API
+
+---------------------------
+RUN .NET FROM CMD PROMPT
+
+to run the .Net project we need to run the cmd as
+
+dotnet run (Make sure we are in the project folder before this)
+
+
+We need to add cert to the make the dev trust 
+
+dotnet dev-certs https --trust
+
+-----------
+
+SETTING THE EF IN VS CODE
+
+in the extension of vs code intall the nuget gallery 
+Once installed , we can go to the nuget gallery and installe the respective entity frame work.
+
+in this case it was sql lite so i have installed the below package .
+Microsoft.EntityFrameworkCore.Sqlite   :- (Note :- to add to select API.csproj, this will add the config details in the API.csproj file) 
+
+
+Once we did this we need to set the connection string in startup.cs file 
+Note :- here we can also set the dependencies injection in the ConfigureServices method.
+
+Once we have table and connection in place , in this case we need to do the migration in or sqllite or sql .
+to check the latest package go to nuget.org search for dotnet-ef , select the right version and copy the path from there.
+
+Note in order to do the migration we need to stop running the app.
+
+CMD for migration is dotnet ef migrations add InitialCreate -o Data/Migrations
+where InitialCreate is the name.
+
+Create DB 
+
+once we have run the above cmd we need to create the DB
+
+run the cmd in vs terminal dotnet ef database update
+
+As we are using sqlite in our case , we can go extension and add sqlite package to see the data.
+
+once you have installed the package you can open the pallet ,
+and select sqlite : open database cmd . and select dattingapp.db(Name given for creating connection string).
+
+
+
+
+
