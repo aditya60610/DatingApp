@@ -55,6 +55,15 @@ once you have installed the package you can open the pallet ,
 and select sqlite : open database cmd . and select dattingapp.db(Name given for creating connection string).
 
 
+----- 
+GIT details 
+
+Refer the details on the lecture 18
+
+---------------------
+
+Angular details 
+
 
 
 
