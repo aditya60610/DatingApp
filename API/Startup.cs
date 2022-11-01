@@ -1,3 +1,4 @@
+using System.Text;
 using System.Net.Mime;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using API.Interface;
+using API.Services;
+using API.Mappers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using API.Extensions;
 
 namespace API
 {
@@ -30,10 +37,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options=>{
-                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            services.AddApplicationServiceExtension(Configuration);
             services.AddControllers();
+            services.AddIdentityService(Configuration);    
            // services.AddCors();
            services.AddCors(o=>o.AddPolicy(MyAllowSpecificOrigins,
                             builder =>{
@@ -63,6 +69,8 @@ namespace API
 
            // app.UseCors(x=> x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
